@@ -106,6 +106,12 @@ class SnakeGameAI:
     def _update_ui(self):
         self.display.fill(COLOR_BACKGROUND)
         
+        # Draw grid
+        for x in range(0, self.w, BLOCK_SIZE):
+            pygame.draw.line(self.display, COLOR_GRID, (x, 0), (x, self.h))
+        for y in range(0, self.h, BLOCK_SIZE):
+            pygame.draw.line(self.display, COLOR_GRID, (0, y), (self.w, y))
+
         # Draw snake with rounded rectangles
         for i, pt in enumerate(self.snake):
             rect = pygame.Rect(pt.x, pt.y, BLOCK_SIZE, BLOCK_SIZE)
