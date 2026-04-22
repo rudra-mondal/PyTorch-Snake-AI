@@ -117,6 +117,25 @@ class SnakeGameAI:
             rect = pygame.Rect(pt.x, pt.y, BLOCK_SIZE, BLOCK_SIZE)
             if i == 0: # Head
                 pygame.draw.rect(self.display, COLOR_SNAKE_OUTLINE, rect, border_radius=7)
+
+                # Add eyes
+                eye_radius = 2
+                eye_color = COLOR_BACKGROUND
+                if self.direction == Direction.RIGHT:
+                    eye1_pos = (pt.x + 15, pt.y + 6)
+                    eye2_pos = (pt.x + 15, pt.y + 14)
+                elif self.direction == Direction.LEFT:
+                    eye1_pos = (pt.x + 5, pt.y + 6)
+                    eye2_pos = (pt.x + 5, pt.y + 14)
+                elif self.direction == Direction.UP:
+                    eye1_pos = (pt.x + 6, pt.y + 5)
+                    eye2_pos = (pt.x + 14, pt.y + 5)
+                elif self.direction == Direction.DOWN:
+                    eye1_pos = (pt.x + 6, pt.y + 15)
+                    eye2_pos = (pt.x + 14, pt.y + 15)
+
+                pygame.draw.circle(self.display, eye_color, eye1_pos, eye_radius)
+                pygame.draw.circle(self.display, eye_color, eye2_pos, eye_radius)
             else: # Body
                 pygame.draw.rect(self.display, COLOR_SNAKE_FILL, rect, border_radius=5)
 
