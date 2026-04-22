@@ -1,0 +1,4 @@
+## 2026-04-22 - [Insecure Deserialization via torch.load]
+**Vulnerability:** The `play.py` file loaded the trained model using `torch.load()` without specifying `weights_only=True`. This could lead to insecure deserialization if an untrusted `.pth` file is provided, as `torch.load()` relies on Python's `pickle` module, which can execute arbitrary code upon deserialization.
+**Learning:** PyTorch models should be saved and loaded carefully. Loading full models (instead of just weights/state dict) is inherently unsafe when handling untrusted files. Even when loading state dicts, `weights_only=True` must be used to ensure only tensors, primitive types, and dictionaries are unpickled.
+**Prevention:** Always use `weights_only=True` when calling `torch.load()` unless there is a specific, well-justified reason to trust the source and load complex Python objects. Whenever possible, save and load only the `state_dict` rather than the entire model object.
