@@ -11,7 +11,7 @@ def play():
     # We don't need a GPU for just playing, CPU is fine
     device = torch.device("cpu")
     agent = Agent() # Create an agent instance
-    agent.model.load_state_dict(torch.load(model_path, map_location=device))
+    agent.model.load_state_dict(torch.load(model_path, map_location=device, weights_only=True))
     agent.model.eval() # Set the model to evaluation mode
 
     game = SnakeGameAI()
